@@ -1,19 +1,5 @@
-export const API_KEY = 'bd4f968086b92c6cd351be53e08c8589';
+export const API_KEY = 'ff5b40f69b1fc2af3eb111af200f6a4b';
 const root = document.getElementById('root');
-const params = new URLSearchParams(location.search);
-const currentCity = params.get('city');
-
-export function getCurrentWeather(city) {
-  fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}`)
-    .then(res => res.json())
-    .then(json => json);
-}
-
-// function getWeatherForecast(city) {
-//   fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}`)
-//     .then(res => res.json())
-//     .then(json => console.log(json));
-// }
 
 function load(src) {
   if (src.endsWith('.js')) {
@@ -23,7 +9,7 @@ function load(src) {
   }
 }
 
-export default function renderHome(js) {
+function renderHome(js) {
   return import(js).then(jsModule => {
     const page = jsModule.create();
     root.innerHTML = '';
@@ -37,11 +23,9 @@ export function renderWeatherPage(js, data) {
     load(data),
   ])
     .then(([jsModule, loadedData]) => {
-      if (loadedData.cod === '404') throw Error('Incorrect city name or city does not exist');
-      const input = document.querySelector('.home__input')
-      history.pushState(null, null, `${location.pathname}/city=${input.value}`);
+      if (loadedData.cod === '404') throw Error('Incorrect city name or city does not exist'); // Create own error when city does not exist
       const page = jsModule.create(loadedData);
-      root.innerHTML = "";
+      root.innerHTML = '';
       root.append(page);
     })
     .catch(err => {
@@ -50,4 +34,18 @@ export function renderWeatherPage(js, data) {
     });
 }
 
-renderHome('./home.js');
+const pathname = location.pathname;
+if (pathname === '/') {
+  renderHome('./home.js');
+} else {
+  renderWeatherPage('./weather.js', `https://api.openweathermap.org/data/2.5/weather?q=${pathname.slice(1)}&appid=${API_KEY}`);
+}
+
+window.addEventListener('popstate', () => {
+  const pathname = location.pathname;
+  if (pathname === '/') {
+    renderHome('./home.js');
+  } else {
+    renderWeatherPage('./weather.js', `https://api.openweathermap.org/data/2.5/weather?q=${pathname.slice(1)}&appid=${API_KEY}`);
+  }
+});
