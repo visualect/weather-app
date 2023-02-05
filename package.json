@@ -1,8 +1,11 @@
 {
   "private": true,
   "type": "module",
-  "scripts": {},
+  "scripts": {
+    "start": "serve -s"
+  },
   "devDependencies": {
-    "eslint": "^8.33.0"
+    "eslint": "^8.33.0",
+    "serve": "^14.2.0"
   }
 }
