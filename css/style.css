@@ -88,7 +88,7 @@ p {
   --color-warning: #FB6C68;
   --border-radius: 35px;
   --font-color: black;
-  --background-color: #f3f3f3;
+  --background-color: rgba(221, 221, 221, 0.6);
   --font-family: 'Gilroy', Arial, Helvetica, sans-serif;
 }
 
@@ -148,6 +148,7 @@ body {
 /* WEATHER */
 
 .weather-container {
+  position: relative;
   display: flex;
   padding: 15px;
   margin: 0 auto;
@@ -205,7 +206,7 @@ body {
   border: none;
   border-radius: var(--border-radius);
   backdrop-filter: blur(14px);
-  background-color: rgba(243, 243, 243, 0.3);
+  background-color: var(--background-color);
 }
 
 .weather-input:focus {
@@ -231,6 +232,7 @@ body {
   padding: 5px;
   background-color: var(--background-color);
   border-radius: var(--border-radius);
+  backdrop-filter: blur(14px);
 }
 
 .weather-info,
@@ -271,6 +273,7 @@ body {
   padding: 5px;
   background-color: var(--background-color);
   border-radius: var(--border-radius);
+  backdrop-filter: blur(14px);
 }
 
 .wind-icon {
@@ -321,6 +324,7 @@ body {
   background-color: var(--background-color);
   border-radius: var(--border-radius);
   padding: 32px;
+  backdrop-filter: blur(14px);
 }
 
 .temp-widget-text,
@@ -353,6 +357,7 @@ body {
   grid-row-start: 2;
   grid-row-end: 4;
   padding: 5px;
+  backdrop-filter: blur(14px);
 }
 
 .temp-feels-like,
@@ -394,6 +399,7 @@ body {
   padding: 15px;
   background-color: var(--background-color);
   border-radius: var(--border-radius);
+  backdrop-filter: blur(14px);
 }
 
 .pressure-text {
@@ -416,6 +422,7 @@ body {
   padding: 15px;
   background-color: var(--background-color);
   border-radius: var(--border-radius);
+  backdrop-filter: blur(14px);
 }
 
 .humidity-text {
@@ -439,5 +446,26 @@ body {
   right: 0;
   padding: 0;
   margin: 0;
-  background-color: var(--color-warning);
+  pointer-events: none;
+  z-index: 0;
+}
+
+[class*="copyrights-pane"] {
+  display: none !important;
+}
+
+[class*="ground-pane"] {
+  filter: saturate(200%)
+}
+
+.map-mask {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0;
+  margin: 0;
+  background: radial-gradient(transparent, white);
+  z-index: 1;
 }

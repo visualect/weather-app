@@ -7,6 +7,28 @@ export function create(data) {
   createCityInfo(container, data);
   createSearchForm(container);
   createWeatherInfo(container, data);
+  ymaps.ready(init);
+  function init() {
+    const mapContainer = document.createElement('div');
+    const mapMask = document.createElement('div');
+    mapContainer.classList.add('map');
+    mapMask.classList.add('map-mask');
+    container.append(mapContainer);
+    container.append(mapMask);
+    const map = new ymaps.Map(mapContainer, {
+      center: [data.coord.lat, data.coord.lon + .6],
+      zoom: 10
+    });
+    // myMap.geoObjects.add(myPlacemark);
+    map.controls.remove('geolocationControl'); // удаляем геолокацию
+    map.controls.remove('searchControl'); // удаляем поиск
+    map.controls.remove('trafficControl'); // удаляем контроль трафика
+    map.controls.remove('typeSelector'); // удаляем тип
+    map.controls.remove('fullscreenControl'); // удаляем кнопку перехода в полноэкранный режим
+    map.controls.remove('zoomControl'); // удаляем контрол зуммирования
+    map.controls.remove('rulerControl'); // удаляем контрол правил
+    map.behaviors.disable(['scrollZoom']); // отключаем скролл карты (опционально)
+  }
 
   return container;
 }
