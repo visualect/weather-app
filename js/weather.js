@@ -13,9 +13,11 @@ export function create(data) {
 
 function convertTime(timestamp) {
   const time = new Date(timestamp * 1000);
-  const convertedTime = `${time.getHours()}:${time.getMinutes()}`;
+  let hours = time.getHours() < 10 ? '0' + time.getHours() : time.getHours();
+  let minutes = time.getMinutes() < 10 ? '0' + time.getMinutes() : time.getMinutes();
+  const convertedTime = `${hours}:${minutes}`;
   return convertedTime;
-}
+} // fix format
 
 function createCityInfo(container, data) {
   const cityContainer = document.createElement('div');
@@ -120,21 +122,60 @@ function createWeatherInfo(container, data) {
 
 
   const tempWidget = document.createElement('div');
-  const tempMain = document.createElement('p');
+  // const tempMain = document.createElement('p');
   const tempFeelsLike = document.createElement('p');
   const tempMin = document.createElement('p');
   const tempMax = document.createElement('p');
-  const tempPressure = document.createElement('p');
-  const tempHumidity = document.createElement('p');
 
   tempWidget.innerHTML =
-  `<div class='temp-main-widget'>
+    `<div class='temp-main-widget'>
   <p class='temp-widget-text'>Temperature</p>
   <p class='temp-main'>${convertTemperature(data.main.temp)}&deg;</p>
   </div>`;
   tempWidget.classList.add('temp-widget');
 
+  const tempDetails = document.createElement('div');
+  const tempIcon = document.createElement('img');
+  const iconWrapper = document.createElement('div');
+  iconWrapper.append(tempIcon);
+  const tempDetailsWrapper = document.createElement('div');
+  tempDetailsWrapper.classList.add('temp-details-wrapper');
+  iconWrapper.classList.add('temp-icon-wrapper');
+  tempIcon.src = '../img/therm.svg';
+  tempFeelsLike.innerHTML = `Feels like:    ${convertTemperature(data.main.feels_like)}&deg;`;
+  tempMin.innerHTML = `Min:    ${convertTemperature(data.main.temp_min)}&deg;`;
+  tempMax.innerHTML = `Max:    ${convertTemperature(data.main.temp_max)}&deg;`;
+  tempDetailsWrapper.append(tempFeelsLike);
+  tempDetailsWrapper.append(tempMin);
+  tempDetailsWrapper.append(tempMax);
+  tempDetails.append(iconWrapper);
+  tempDetails.append(tempDetailsWrapper);
+
+  tempDetails.classList.add('temp-details');
+  tempFeelsLike.classList.add('temp-feels-like');
+  tempMin.classList.add('temp-min');
+  tempMax.classList.add('temp-max');
+  tempIcon.classList.add('temp-icon');
+
   weatherInfoContainer.append(tempWidget);
+  weatherInfoContainer.append(tempDetails);
+
+  const pressureContainer = document.createElement('div');
+  pressureContainer.classList.add('pressure-widget');
+  pressureContainer.innerHTML = `
+  <p class='pressure-text'>Atmospheric pressure</p>
+  <p class='pressure-value'>${data.main.pressure} hPa</p>
+  `;
+  weatherInfoContainer.append(pressureContainer);
+
+
+  const humidityContainer = document.createElement('div');
+  humidityContainer.classList.add('humidity-widget');
+  humidityContainer.innerHTML = `
+  <p class='humidity-text'>Humidity</p>
+  <p class='humidity-value'>${data.main.humidity}%</p>
+  `;
+  weatherInfoContainer.append(humidityContainer);
 
 }
 
