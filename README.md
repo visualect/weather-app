@@ -1,0 +1,1 @@
+Single-page application on vanilla javascript with History API routing, OpenWeatherMap API to show the weather in different parts of the world, and the Yandex Maps API to display the location of the entered city on a map.
