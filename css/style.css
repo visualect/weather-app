@@ -88,13 +88,14 @@ p {
   --color-warning: #FB6C68;
   --border-radius: 35px;
   --font-color: black;
-  --background-color: rgba(221, 221, 221, 0.6);
+  --background-color: rgba(163, 163, 163, 0.3);
   --font-family: 'Gilroy', Arial, Helvetica, sans-serif;
 }
 
 body {
   font-family: var(--font-family);
   font-weight: 400;
+  background-color: white;
 }
 
 /* HOME */
@@ -103,9 +104,9 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 1920px;
+  width: 100%;
   height: 100vh;
-  background-color: var(--background-color);
+  background-color: var(--color-blue);
 }
 
 .home__form {
@@ -114,9 +115,10 @@ body {
 }
 
 .home__input {
-  width: 600px;
+  width: 400px;
   font-size: 22px;
   padding: 8px 14px 8px 14px;
+  margin-bottom: 5px;
   border-radius: 22px;
   border: none;
 }
@@ -140,8 +142,11 @@ body {
   cursor: pointer;
 }
 
-.home__err-display {
+.err-display {
+  min-height: 19px;
+  text-align: center;
   color: var(--color-warning);
+  font-weight: 800;
 }
 
 
@@ -152,7 +157,7 @@ body {
   display: flex;
   padding: 15px;
   margin: 0 auto;
-  width: 1920px;
+  width: 100%;
   height: 100vh;
   background-color: var(--color-blue);
 }
@@ -185,7 +190,7 @@ body {
 
 .city__sunrise,
 .city__sunset {
-  font-weight: 400;
+  font-weight: 500;
 }
 
 /* search form */
@@ -193,6 +198,7 @@ body {
 .weather-form {
   width: 400px;
   margin-right: 50px;
+  padding-left: 20px;
   z-index: 2;
 }
 
@@ -466,6 +472,6 @@ body {
   right: 0;
   padding: 0;
   margin: 0;
-  background: radial-gradient(transparent, white);
+  background: radial-gradient(ellipse at 40% 50%, transparent 30%, rgb(255, 255, 255) 75%);
   z-index: 1;
 }
