@@ -1,7 +1,0 @@
-{
-  "eslint.codeActionsOnSave.rules": null,
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
-  },
-  "editor.formatOnSave": false
-}
