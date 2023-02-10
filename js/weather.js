@@ -16,18 +16,18 @@ export function create(data) {
     container.append(mapContainer);
     container.append(mapMask);
     const map = new ymaps.Map(mapContainer, {
-      center: [data.coord.lat, data.coord.lon + .6],
-      zoom: 10
+      center: [data.coord.lat, data.coord.lon + .25],
+      zoom: 11,
     });
-    // myMap.geoObjects.add(myPlacemark);
-    map.controls.remove('geolocationControl'); // удаляем геолокацию
-    map.controls.remove('searchControl'); // удаляем поиск
-    map.controls.remove('trafficControl'); // удаляем контроль трафика
-    map.controls.remove('typeSelector'); // удаляем тип
-    map.controls.remove('fullscreenControl'); // удаляем кнопку перехода в полноэкранный режим
-    map.controls.remove('zoomControl'); // удаляем контрол зуммирования
-    map.controls.remove('rulerControl'); // удаляем контрол правил
-    map.behaviors.disable(['scrollZoom']); // отключаем скролл карты (опционально)
+
+    map.controls.remove('geolocationControl');
+    map.controls.remove('searchControl');
+    map.controls.remove('trafficControl');
+    map.controls.remove('typeSelector');
+    map.controls.remove('fullscreenControl');
+    map.controls.remove('zoomControl');
+    map.controls.remove('rulerControl');
+    map.behaviors.disable(['scrollZoom']);
   }
 
   return container;
@@ -39,7 +39,7 @@ function convertTime(timestamp) {
   let minutes = time.getMinutes() < 10 ? '0' + time.getMinutes() : time.getMinutes();
   const convertedTime = `${hours}:${minutes}`;
   return convertedTime;
-} // fix format
+}
 
 function createCityInfo(container, data) {
   const cityContainer = document.createElement('div');
@@ -69,11 +69,14 @@ function createCityInfo(container, data) {
 function createSearchForm(container) {
   const form = document.createElement('form');
   const input = document.createElement('input');
+  const errDisplay = document.createElement('div');
+  errDisplay.classList.add('err-display');
   input.placeholder = 'City';
   form.append(input);
+  form.append(errDisplay);
   form.addEventListener('submit', event => {
     event.preventDefault();
-    history.replaceState(null, null, `${input.value}`);
+    if (!input.value) return;
     renderWeatherPage(
       './weather.js',
       `https://api.openweathermap.org/data/2.5/weather?q=${input.value}&appid=${API_KEY}`
@@ -97,7 +100,8 @@ function createWeatherInfo(container, data) {
 
   weatherInfo.textContent = data.weather[0].main;
   weatherDescription.textContent = data.weather[0].description;
-  weatherIcon.src = `http://openweathermap.org/img/wn/${data.weather[0].icon}.png`;
+  weatherIcon.src = `https://openweathermap.org/img/wn/${data.weather[0].icon}@4x.png`;
+  weatherIcon.alt = 'weather icon';
 
   weatherWidget.classList.add('weather-widget');
   weatherInfo.classList.add('weather-info');
@@ -122,6 +126,7 @@ function createWeatherInfo(container, data) {
   const windDeg = document.createElement('p');
 
   windIcon.src = '../img/wind.svg';
+  windIcon.alt = 'wind icon';
   windHeading.textContent = 'Wind';
   windSpeed.textContent = `Speed: ${data.wind.speed} m/s`;
   windDeg.innerHTML = `Deg: ${data.wind.deg}&deg;`; // Добавить значок градусов
@@ -164,6 +169,7 @@ function createWeatherInfo(container, data) {
   tempDetailsWrapper.classList.add('temp-details-wrapper');
   iconWrapper.classList.add('temp-icon-wrapper');
   tempIcon.src = '../img/therm.svg';
+  tempIcon.alt = 'temp icon';
   tempFeelsLike.innerHTML = `Feels like:    ${convertTemperature(data.main.feels_like)}&deg;`;
   tempMin.innerHTML = `Min:    ${convertTemperature(data.main.temp_min)}&deg;`;
   tempMax.innerHTML = `Max:    ${convertTemperature(data.main.temp_max)}&deg;`;

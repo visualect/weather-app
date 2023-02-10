@@ -12,7 +12,6 @@ export function create() {
   form.addEventListener('submit', event => {
     event.preventDefault();
     if (!input.value) return;
-    history.pushState(null, null, `${input.value}`);
     renderWeatherPage(
       './weather.js',
       `https://api.openweathermap.org/data/2.5/weather?q=${input.value}&appid=${API_KEY}`
@@ -23,7 +22,7 @@ export function create() {
   form.classList.add('home__form');
   input.classList.add('home__input');
   inputWrapper.classList.add('home__input-wrapper');
-  displayError.classList.add('home__err-display');
+  displayError.classList.add('err-display');
 
   inputWrapper.append(input);
   form.append(inputWrapper);

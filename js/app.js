@@ -23,14 +23,19 @@ export function renderWeatherPage(js, data) {
     load(data),
   ])
     .then(([jsModule, loadedData]) => {
-      if (loadedData.cod === '404') throw Error('Incorrect city name or city does not exist'); // Create own error when city does not exist
+      if (loadedData.cod === '404') throw new SearchError();
+      history.replaceState(null, null, `${loadedData.name}`);
       const page = jsModule.create(loadedData);
       root.innerHTML = '';
       root.append(page);
     })
     .catch(err => {
-      const errDisplay = document.querySelector('.home__err-display');
-      errDisplay.textContent = err.message;
+      if (err instanceof SearchError) {
+        const errDisplay = document.querySelector('.err-display');
+        errDisplay.textContent = err.message;
+      } else {
+        throw err;
+      }
     });
 }
 
@@ -49,3 +54,9 @@ window.addEventListener('popstate', () => {
     renderWeatherPage('./weather.js', `https://api.openweathermap.org/data/2.5/weather?q=${pathname.slice(1)}&appid=${API_KEY}`);
   }
 });
+
+class SearchError extends Error {
+  constructor() {
+    super('Incorrect city name or city does not exist');
+  }
+}
