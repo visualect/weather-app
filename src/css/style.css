@@ -88,14 +88,16 @@ p {
   --color-warning: #FB6C68;
   --border-radius: 35px;
   --font-color: black;
-  --background-color: rgba(163, 163, 163, 0.3);
+  --background-color: rgba(255, 255, 255, 0.5);
   --font-family: 'Gilroy', Arial, Helvetica, sans-serif;
 }
 
 body {
+  min-height: 100vh;
   font-family: var(--font-family);
   font-weight: 400;
-  background: linear-gradient(to right, rgb(56, 189, 248), rgb(59, 130, 246))
+  background: linear-gradient(to right, rgb(56, 189, 248), rgb(59, 130, 246));
+  background-color: white;
 }
 
 /* HOME */
@@ -157,10 +159,11 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* gap: 54px; */
-  padding: 0 12px;
+  gap: 48px;
+  padding: 24px 12px;
   margin: 0 auto;
-  width: 500px;
+  max-width: 500px;
+  min-height: 100vh;
   background-color: transparent;
 }
 
@@ -223,13 +226,13 @@ body {
 
 .weather-info-container {
   display: grid;
+  grid-template-rows: 1fr 2fr 1fr;
   grid-template-columns: 1fr 1fr;
   gap: 15px;
   width: 100%;
-  padding: 12px;
+  height: fit-content;
   z-index: 2;
   border-radius: var(--border-radius);
-  /* background: linear-gradient(to right, rgb(243, 244, 246), rgb(209, 213, 219)); */
 }
 
 .weather-widget {
@@ -356,8 +359,9 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%;
-  font-size: 148px;
+  font-size: 124px;
+  font-weight: 600;
+  height: 80%;
 }
 
 .temp-details {
@@ -408,9 +412,10 @@ body {
 .pressure-widget {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 8px;
   width: 100%;
-  max-height: 110px;
+  min-height: 110px;
   padding: 8px;
   background-color: var(--background-color);
   border-radius: var(--border-radius);
@@ -418,8 +423,8 @@ body {
 }
 
 .pressure-text {
-  font-size: 18px;
-  font-weight: 400;
+  font-size: 16px;
+  font-weight: 600;
 }
 
 .pressure-value {
@@ -434,15 +439,18 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 15px;
+  gap: 8px;
+  width: 100%;
+  min-height: 110px;
+  padding: 8px;
   background-color: var(--background-color);
   border-radius: var(--border-radius);
   backdrop-filter: blur(14px);
 }
 
 .humidity-text {
-  font-size: 18px;
-  font-weight: 400;
+  font-size: 16px;
+  font-weight: 600;
 }
 
 .humidity-value {
