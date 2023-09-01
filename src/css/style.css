@@ -95,7 +95,7 @@ p {
 body {
   font-family: var(--font-family);
   font-weight: 400;
-  background-color: white;
+  background: linear-gradient(to right, rgb(56, 189, 248), rgb(59, 130, 246))
 }
 
 /* HOME */
@@ -155,11 +155,13 @@ body {
 .weather-container {
   position: relative;
   display: flex;
-  padding: 15px;
+  flex-direction: column;
+  align-items: center;
+  /* gap: 54px; */
+  padding: 0 12px;
   margin: 0 auto;
-  width: 100%;
-  height: 100vh;
-  background-color: var(--color-blue);
+  width: 500px;
+  background-color: transparent;
 }
 
 /* city info */
@@ -167,7 +169,7 @@ body {
 .city-container {
   display: flex;
   flex-direction: column;
-  margin-right: auto;
+  width: 100%;
   z-index: 2;
 }
 .city__name,
@@ -196,9 +198,7 @@ body {
 /* search form */
 
 .weather-form {
-  width: 400px;
-  margin-right: 50px;
-  padding-left: 20px;
+  width: 100%;
   z-index: 2;
 }
 
@@ -224,18 +224,21 @@ body {
 .weather-info-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-auto-rows: 110px;
   gap: 15px;
-  width: 1000px;
-  height: 900px;
+  width: 100%;
+  padding: 12px;
   z-index: 2;
+  border-radius: var(--border-radius);
+  /* background: linear-gradient(to right, rgb(243, 244, 246), rgb(209, 213, 219)); */
 }
 
 .weather-widget {
   display: flex;
+  flex-direction: row;
+  gap: 12px;
   width: 100%;
   max-height: 110px;
-  padding: 5px;
+  padding: 8px;
   background-color: var(--background-color);
   border-radius: var(--border-radius);
   backdrop-filter: blur(14px);
@@ -248,42 +251,44 @@ body {
 }
 
 .weather-icon {
-  width: 100px;
-  height: 100px;
+  height: 100%;
+  aspect-ratio: 1 / 1;
   background-color: white;
   border-radius: var(--border-radius);
-  margin-right: 24px;
 }
 
 .weather-wrapper {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: 5px;
+  justify-content: start;
+  width: 100%;
+  gap: 8px;
 }
 
 .weather-info {
-  font-size: 36px;
+  font-size: 24px;
   font-weight: 600;
 }
 
 .weather-desc {
-  font-size: 24px;
+  font-size: 18px;
   font-weight: 300;
 }
 
 .wind-widget {
   display: flex;
+  flex-direction: row;
+  gap: 12px;
   width: 100%;
   max-height: 110px;
-  padding: 5px;
+  padding: 8px;
   background-color: var(--background-color);
   border-radius: var(--border-radius);
   backdrop-filter: blur(14px);
 }
 
 .wind-icon {
-  width: 60px;
+  width: 50%;
   height: auto;
 }
 
@@ -298,9 +303,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100px;
-  height: 100px;
-  margin-right: 24px;
+  aspect-ratio: 1 / 1;
+  height: 100%;
   background-color: white;
   border-radius: var(--border-radius);
 }
@@ -308,28 +312,27 @@ body {
 .wind-wrapper {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: 5px;
+  justify-content: start;
+  gap: 8px;
 }
 
 .wind-heading {
-  font-size: 14px;
-  margin-bottom: 10px;
-  font-weight: 800;
+  font-size: 24px;
+  font-weight: 600;
 }
 
 .wind-speed,
 .wind-deg {
-  font-size: 20px;
+  font-size: 14px;
   font-weight: 500;
 }
 
 .temp-widget {
   grid-row-start: 2;
-  grid-row-end: 6;
+  grid-row-end: 4;
   background-color: var(--background-color);
   border-radius: var(--border-radius);
-  padding: 32px;
+  padding: 8px;
   backdrop-filter: blur(14px);
 }
 
@@ -346,6 +349,7 @@ body {
 .temp-widget-text {
   text-align: center;
   font-size: 24px;
+  font-weight: 600;
 }
 
 .temp-main {
@@ -353,16 +357,18 @@ body {
   justify-content: center;
   align-items: center;
   height: 100%;
-  font-size: 200px;
+  font-size: 148px;
 }
 
 .temp-details {
   display: flex;
-  background-color: var(--background-color);
-  border-radius: var(--border-radius);
+  flex-direction: column;
+  gap: 8px;
   grid-row-start: 2;
   grid-row-end: 4;
-  padding: 5px;
+  padding: 8px;
+  background-color: var(--background-color);
+  border-radius: var(--border-radius);
   backdrop-filter: blur(14px);
 }
 
@@ -379,30 +385,33 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 30px;
+  align-items: center;
+  height: 50%;
+  gap: 12px;
 }
 
 .temp-icon-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 225px;
-  height: 100%;
+  aspect-ratio: 1 / 1;
+  height: 50%;
   background-color: var(--color-yellow);
   border-radius: var(--border-radius);
-  margin-right: 24px;
 }
 
 .temp-icon {
-  width: 150px;
+  width: 50%;
   height: auto;
 }
 
 .pressure-widget {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: 15px;
+  gap: 8px;
+  width: 100%;
+  max-height: 110px;
+  padding: 8px;
   background-color: var(--background-color);
   border-radius: var(--border-radius);
   backdrop-filter: blur(14px);
@@ -445,13 +454,13 @@ body {
 }
 
 .map {
-  position: absolute;
+  /* position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
   padding: 0;
-  margin: 0;
+  margin: 0; */
   pointer-events: none;
   z-index: 0;
 }
@@ -472,6 +481,6 @@ body {
   right: 0;
   padding: 0;
   margin: 0;
-  background: radial-gradient(ellipse at 40% 50%, transparent 30%, rgb(255, 255, 255) 75%);
+  /* background: radial-gradient(ellipse at 40% 50%, transparent 30%, rgb(255, 255, 255) 75%); */
   z-index: 1;
 }

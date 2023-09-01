@@ -1,4 +1,4 @@
-import { renderWeatherPage, API_KEY } from './app.js';
+import { renderWeatherPage, API_KEY } from '../index.js';
 
 export function create() {
   const container = document.createElement('div');
@@ -13,7 +13,7 @@ export function create() {
     event.preventDefault();
     if (!input.value) return;
     renderWeatherPage(
-      './weather.js',
+      './pages/weather.js',
       `https://api.openweathermap.org/data/2.5/weather?q=${input.value}&appid=${API_KEY}`
     );
   });

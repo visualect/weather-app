@@ -39,19 +39,19 @@ export function renderWeatherPage(js, data) {
     });
 }
 
-const pathname = location.pathname;
+const pathname = window.location.pathname;
 if (pathname === '/') {
-  renderHome('./home.js');
+  renderHome('./pages/home.js');
 } else {
-  renderWeatherPage('./weather.js', `https://api.openweathermap.org/data/2.5/weather?q=${pathname.slice(1)}&appid=${API_KEY}`);
+  renderWeatherPage('./pages/weather.js', `https://api.openweathermap.org/data/2.5/weather?q=${pathname.slice(1)}&appid=${API_KEY}`);
 }
 
 window.addEventListener('popstate', () => {
   const pathname = location.pathname;
   if (pathname === '/') {
-    renderHome('./home.js');
+    renderHome('./pages/home.js');
   } else {
-    renderWeatherPage('./weather.js', `https://api.openweathermap.org/data/2.5/weather?q=${pathname.slice(1)}&appid=${API_KEY}`);
+    renderWeatherPage('./pages/weather.js', `https://api.openweathermap.org/data/2.5/weather?q=${pathname.slice(1)}&appid=${API_KEY}`);
   }
 });
 

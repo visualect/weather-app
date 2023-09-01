@@ -1,4 +1,4 @@
-import { renderWeatherPage, API_KEY } from './app.js';
+import { renderWeatherPage, API_KEY } from '../index.js';
 
 export function create(data) {
   const container = document.createElement('div');
@@ -7,7 +7,9 @@ export function create(data) {
   createCityInfo(container, data);
   createSearchForm(container);
   createWeatherInfo(container, data);
+  // eslint-disable-next-line no-undef
   ymaps.ready(init);
+
   function init() {
     const mapContainer = document.createElement('div');
     const mapMask = document.createElement('div');
@@ -15,6 +17,7 @@ export function create(data) {
     mapMask.classList.add('map-mask');
     container.append(mapContainer);
     container.append(mapMask);
+    // eslint-disable-next-line no-undef
     const map = new ymaps.Map(mapContainer, {
       center: [data.coord.lat, data.coord.lon + .25],
       zoom: 11,
@@ -78,7 +81,7 @@ function createSearchForm(container) {
     event.preventDefault();
     if (!input.value) return;
     renderWeatherPage(
-      './weather.js',
+      './pages/weather.js',
       `https://api.openweathermap.org/data/2.5/weather?q=${input.value}&appid=${API_KEY}`
     );
   });

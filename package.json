@@ -2,7 +2,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "serve -s"
+    "start": "serve ./src --single"
   },
   "devDependencies": {
     "eslint": "^8.33.0",
