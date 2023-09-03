@@ -1,0 +1,86 @@
+@media (max-width: 768px) {
+  .weather-wrapper {
+    flex-direction: column;
+  }
+
+  .wind-wrapper {
+    flex-direction: column;
+  }
+
+  .temp-main {
+    font-size: 124px;
+  }
+
+  .pressure-value {
+    font-size: 75px;
+  }
+
+  .weather-icon,
+  .wind-icon-wrapper,
+  .wind-icon {
+    display: none;
+  }
+}
+
+@media (max-width: 425px) {
+  .temp-main {
+    font-size: 64px;
+  }
+
+  .pressure-value {
+    font-size: 32px;
+  }
+
+  .weather-info,
+  .wind-heading {
+    font-size: 18px;
+  }
+
+  .wind-widget,
+  .weather-widget,
+  .temp-widget,
+  .temp-details,
+  .pressure-widget,
+  .humidity-widget {
+    padding: 16px;
+  }
+
+  .temp-widget-text,
+  .humidity-text,
+  .pressure-text {
+    font-size: 18px;
+  }
+
+  .temp-feels-like,
+  .temp-min,
+  .temp-max {
+    font-size: 24px;
+  }
+
+  .humidity-value {
+    font-size: 48px;
+  }
+}
+
+
+@media (max-width: 375px) {
+  .temp-feels-like,
+  .temp-min,
+  .temp-max {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 375px) {
+  .temp-widget-text {
+    font-size: 16px;
+  }
+
+  .pressure-value {
+    font-size: 24px;
+  }
+
+  .humidity-value {
+    font-size: 32px;
+  }
+}

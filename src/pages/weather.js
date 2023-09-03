@@ -4,23 +4,22 @@ export function create(data) {
   const container = document.createElement('div');
   container.classList.add('weather-container');
 
-  createCityInfo(container, data);
   createSearchForm(container);
+  createMap(container);
   createWeatherInfo(container, data);
   // eslint-disable-next-line no-undef
   ymaps.ready(init);
 
   function init() {
-    const mapContainer = document.createElement('div');
+    const mapContainer = document.querySelector('.map-container');
     const mapMask = document.createElement('div');
-    mapContainer.classList.add('map');
     mapMask.classList.add('map-mask');
-    container.append(mapContainer);
-    container.append(mapMask);
+    mapContainer.append(mapMask);
+    createCityInfo(mapContainer, data);
     // eslint-disable-next-line no-undef
     const map = new ymaps.Map(mapContainer, {
-      center: [data.coord.lat, data.coord.lon + .25],
-      zoom: 11,
+      center: [data.coord.lat, data.coord.lon],
+      zoom: 10,
     });
 
     map.controls.remove('geolocationControl');
@@ -42,6 +41,12 @@ function convertTime(timestamp) {
   let minutes = time.getMinutes() < 10 ? '0' + time.getMinutes() : time.getMinutes();
   const convertedTime = `${hours}:${minutes}`;
   return convertedTime;
+}
+
+function createMap(container) {
+  const mapContainer = document.createElement('div');
+  mapContainer.classList.add('map-container');
+  container.append(mapContainer);
 }
 
 function createCityInfo(container, data) {
@@ -72,11 +77,8 @@ function createCityInfo(container, data) {
 function createSearchForm(container) {
   const form = document.createElement('form');
   const input = document.createElement('input');
-  const errDisplay = document.createElement('div');
-  errDisplay.classList.add('err-display');
   input.placeholder = 'City';
   form.append(input);
-  form.append(errDisplay);
   form.addEventListener('submit', event => {
     event.preventDefault();
     if (!input.value) return;
@@ -116,7 +118,6 @@ function createWeatherInfo(container, data) {
   weatherWrapper.append(weatherDescription);
   weatherWidget.append(weatherIcon);
   weatherWidget.append(weatherWrapper);
-  weatherInfoContainer.append(weatherWidget);
 
 
 
@@ -125,6 +126,7 @@ function createWeatherInfo(container, data) {
   const windIconWrapper = document.createElement('div');
   const windWrapper = document.createElement('div');
   const windHeading = document.createElement('h2');
+  const windInfo = document.createElement('div');
   const windSpeed = document.createElement('p');
   const windDeg = document.createElement('p');
 
@@ -139,20 +141,19 @@ function createWeatherInfo(container, data) {
   windIcon.classList.add('wind-icon');
   windWrapper.classList.add('wind-wrapper');
   windHeading.classList.add('wind-heading');
+  windInfo.classList.add('wind-info');
   windSpeed.classList.add('wind-speed');
   windDeg.classList.add('wind-deg');
 
   windIconWrapper.append(windIcon);
   windWidget.append(windIconWrapper);
   windWrapper.append(windHeading);
-  windWrapper.append(windSpeed);
-  windWrapper.append(windDeg);
+  windInfo.append(windSpeed);
+  windInfo.append(windDeg);
+  windWrapper.append(windInfo);
   windWidget.append(windWrapper);
-  weatherInfoContainer.append(windWidget);
-
 
   const tempWidget = document.createElement('div');
-  // const tempMain = document.createElement('p');
   const tempFeelsLike = document.createElement('p');
   const tempMin = document.createElement('p');
   const tempMax = document.createElement('p');
@@ -188,17 +189,12 @@ function createWeatherInfo(container, data) {
   tempMax.classList.add('temp-max');
   tempIcon.classList.add('temp-icon');
 
-  weatherInfoContainer.append(tempWidget);
-  weatherInfoContainer.append(tempDetails);
-
   const pressureContainer = document.createElement('div');
   pressureContainer.classList.add('pressure-widget');
   pressureContainer.innerHTML = `
   <p class='pressure-text'>Atmospheric pressure</p>
   <p class='pressure-value'>${data.main.pressure} hPa</p>
   `;
-  weatherInfoContainer.append(pressureContainer);
-
 
   const humidityContainer = document.createElement('div');
   humidityContainer.classList.add('humidity-widget');
@@ -206,6 +202,12 @@ function createWeatherInfo(container, data) {
   <p class='humidity-text'>Humidity</p>
   <p class='humidity-value'>${data.main.humidity}%</p>
   `;
+
+  weatherInfoContainer.append(windWidget);
+  weatherInfoContainer.append(weatherWidget);
+  weatherInfoContainer.append(tempWidget);
+  weatherInfoContainer.append(tempDetails);
+  weatherInfoContainer.append(pressureContainer);
   weatherInfoContainer.append(humidityContainer);
 
 }

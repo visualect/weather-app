@@ -31,8 +31,7 @@ export function renderWeatherPage(js, data) {
     })
     .catch(err => {
       if (err instanceof SearchError) {
-        const errDisplay = document.querySelector('.err-display');
-        errDisplay.textContent = err.message;
+        alert(err.message);
       } else {
         throw err;
       }
