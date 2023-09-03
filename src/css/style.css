@@ -100,7 +100,6 @@ body {
   font-family: var(--font-family);
   font-weight: 400;
   background: linear-gradient(to right, rgb(243, 244, 246), rgb(209, 213, 219));
-  /* background: conic-gradient(at center top, rgb(17, 24, 39), rgb(243, 244, 246), rgb(17, 24, 39)); */
 }
 
 #root {
