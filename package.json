@@ -2,7 +2,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "serve ./src --single"
+    "start": "serve ./src --single",
+    "sass": "sass --watch src/sass:src/css"
   },
   "devDependencies": {
     "eslint": "^8.33.0",

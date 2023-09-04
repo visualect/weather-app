@@ -1,0 +1,47 @@
+@mixin fontGilroy($weight: 400, $url: '../fonts/Gilroy-Regular.woff') {
+  font-family: 'Gilroy';
+  src: url($url) format('woff');
+  font-weight: $weight;
+  font-display: auto;
+  font-style: normal;
+}
+
+@font-face {
+  @include fontGilroy($weight: 900, $url: '../fonts/Gilroy-Black.woff')
+}
+
+@font-face {
+  @include fontGilroy($weight: 800, $url: '../fonts/Gilroy-ExtraBold.woff')
+}
+
+@font-face {
+  @include fontGilroy($weight: 700, $url: '../fonts/Gilroy-Bold.woff')
+}
+
+@font-face {
+  @include fontGilroy($weight: 600, $url: '../fonts/Gilroy-SemiBold.woff')
+}
+
+@font-face {
+  @include fontGilroy($weight: 500, $url: '../fonts/Gilroy-Medium.woff')
+}
+
+@font-face {
+  @include fontGilroy($weight: 400, $url: '../fonts/Gilroy-Regular.woff')
+}
+
+@font-face {
+  @include fontGilroy($weight: 300, $url: '../fonts/Gilroy-Light.woff')
+}
+
+@font-face {
+  @include fontGilroy($weight: 200, $url: '../fonts/Gilroy-ExtraLight.woff')
+}
+
+@font-face {
+  @include fontGilroy($weight: 200, $url: '../fonts/Gilroy-ExtraLight.woff')
+}
+
+@font-face {
+  @include fontGilroy($weight: 100, $url: '../fonts/Gilroy-Thin.woff')
+}

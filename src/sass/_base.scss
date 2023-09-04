@@ -1,0 +1,22 @@
+@use 'normalize';
+@use 'fonts';
+@use 'variables';
+
+* {
+  box-sizing: border-box;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+  font-family: variables.$fontFamily;
+  font-weight: 400;
+  background: linear-gradient(to right, rgb(243, 244, 246), rgb(209, 213, 219));
+}
