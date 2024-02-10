@@ -1,16 +1,34 @@
+(async () => {
+  if ("serviceWorker" in navigator) {
+    try {
+      const registration = await navigator.serviceWorker.register('./sw.js')
+      if (registration.installing) {
+        console.log('Service worker is installing')
+      } else if (registration.waiting) {
+        console.log('Service worker is successfully installed')
+      } else if (registration.active) {
+        console.log('Service Worker is active')
+      }
+      console.log(registration)
+    } catch(err) {
+      console.error('Registration is failed with ' + err.message)
+    }
+  }
+})()
+
 export const API_KEY = 'ff5b40f69b1fc2af3eb111af200f6a4b';
 const root = document.getElementById('root');
 
-function load(src) {
+async function load(src) {
   if (src.endsWith('.js')) {
-    return import(src);
+    return await import(src);
   } else {
     return fetch(src).then(res => res.json());
   }
 }
 
-function renderHome(js) {
-  return import(js).then(jsModule => {
+async function renderHome(js) {
+  return await import(js).then(jsModule => {
     const page = jsModule.create();
     root.innerHTML = '';
     root.append(page);
